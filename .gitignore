@@ -1,0 +1,14 @@
+# Ignore vendor / IDE files
+.vscode/
+.idea/
+*.log
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / sensitive files
+.env
