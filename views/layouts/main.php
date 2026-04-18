@@ -8,9 +8,10 @@
         content="<?= h($title ?? 'Find your dream job') ?> - <?= APP_NAME ?> Job Vacancy Management System">
     <title><?= h($title ?? 'Home') ?> | <?= APP_NAME ?></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preload" as="image" href="/images/auth.jpg">
 </head>
 
-<body>
+<body class="<?= isset($isAuthPage) ? 'auth-layout' : '' ?>">
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">

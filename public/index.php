@@ -6,11 +6,11 @@
 
 session_start();
 
-// Define app root
-define('APP_ROOT', dirname(__DIR__));
+// Load config FIRST (without APP_ROOT)
+require_once __DIR__ . '/../config/config.php';
 
 // Load core files
-require_once APP_ROOT . '/config/config.php';
+// require_once APP_ROOT . '/config/config.php';
 require_once APP_ROOT . '/config/database.php';
 require_once APP_ROOT . '/helpers/functions.php';
 require_once APP_ROOT . '/helpers/Validator.php';

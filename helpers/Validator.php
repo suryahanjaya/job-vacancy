@@ -24,6 +24,7 @@ class Validator
 
     public function email($field, $label = null)
     {
+        if (isset($this->errors[$field])) return $this;
         $label = $label ?? $field;
         if (isset($this->data[$field]) && !filter_var($this->data[$field], FILTER_VALIDATE_EMAIL)) {
             $this->errors[$field] = "$label must be a valid email address.";
@@ -33,6 +34,7 @@ class Validator
 
     public function minLength($field, $min, $label = null)
     {
+        if (isset($this->errors[$field])) return $this;
         $label = $label ?? $field;
         if (isset($this->data[$field]) && strlen($this->data[$field]) < $min) {
             $this->errors[$field] = "$label must be at least $min characters.";
@@ -42,6 +44,7 @@ class Validator
 
     public function maxLength($field, $max, $label = null)
     {
+        if (isset($this->errors[$field])) return $this;
         $label = $label ?? $field;
         if (isset($this->data[$field]) && strlen($this->data[$field]) > $max) {
             $this->errors[$field] = "$label must not exceed $max characters.";
@@ -89,6 +92,7 @@ class Validator
     {
         $label = $label ?? $field;
         $matchLabel = $matchLabel ?? $matchField;
+        if (isset($this->errors[$field])) return $this;
         if (isset($this->data[$field]) && $this->data[$field] !== ($this->data[$matchField] ?? null)) {
             $this->errors[$field] = "$label must match $matchLabel.";
         }

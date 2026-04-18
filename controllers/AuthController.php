@@ -25,7 +25,7 @@ class AuthController
         if (isLoggedIn()) {
             redirect('/dashboard');
         }
-        view('auth/login', ['title' => 'Login'], null);
+        view('auth/login', ['title' => 'Login', 'isAuthPage' => true]);
     }
 
     /**
@@ -89,7 +89,7 @@ class AuthController
         if (isLoggedIn()) {
             redirect('/dashboard');
         }
-        view('auth/register', ['title' => 'Register'], null);
+        view('auth/register', ['title' => 'Register', 'isAuthPage' => true]);
     }
 
     /**
@@ -121,9 +121,10 @@ class AuthController
             ->email('email', 'Email')
             ->required('password', 'Password')
             ->minLength('password', 6, 'Password')
+            ->required('password_confirm', 'Password confirmation')
             ->matches('password_confirm', 'password', 'Password confirmation', 'Password')
             ->in('role', ['employer', 'jobseeker'], 'Role');
-
+            
         // Company name required for employers
         if ($data['role'] === 'employer') {
             $validator->required('company_name', 'Company name');
