@@ -353,3 +353,114 @@ window.addEventListener('scroll', function() {
         }
     }
 });
+
+/**
+ * Edit profile field
+ */
+function editField(field) {
+    const row = document.getElementById(field + 'Text').closest('.profile-row');
+
+    // Reset only inside the clicked row
+    document.querySelectorAll('.profile-row').forEach(r => {
+        r.querySelectorAll('.profile-value').forEach(el => el.style.display = 'inline');
+        r.querySelectorAll('.form-control').forEach(el => el.style.display = 'none');
+        r.querySelectorAll('.profile-btn.edit').forEach(el => el.style.display = 'inline-block');
+        r.querySelectorAll('.profile-btn.save').forEach(el => el.style.display = 'none');
+        r.querySelectorAll('.profile-btn.cancel').forEach(el => el.style.display = 'none');
+    });
+
+    // Activate only current row
+    const text = document.getElementById(field + 'Text');
+    const input = document.getElementById(field + 'Input');
+    const editBtn = document.getElementById(field + 'Edit');
+    const saveBtn = document.getElementById(field + 'Save');
+    const cancelBtn = document.getElementById(field + 'Cancel');
+
+    text.style.display = 'none';
+    input.style.display = 'inline-block';
+
+    editBtn.style.display = 'none';
+    saveBtn.style.display = 'inline-block';
+    cancelBtn.style.display = 'inline-block';
+
+    input.focus();
+    toggleSave(field);
+}
+
+/**
+ * Confirm account deactivation
+ */
+function confirmDeactivate() {
+    if (confirm('Are you sure you want to deactivate your account? This action cannot be undone.')) {
+        document.getElementById('deactivateForm').submit();
+    }
+}
+
+/**
+ * Cancel edit
+ */
+function cancelEdit(field) {
+    const text = document.getElementById(field + 'Text');
+    const input = document.getElementById(field + 'Input');
+    const editBtn = document.getElementById(field + 'Edit');
+    const saveBtn = document.getElementById(field + 'Save');
+    const cancelBtn = document.getElementById(field + 'Cancel');
+
+    // Restore original value
+    input.value = text.innerText.trim();
+
+    // Only reset one field
+    text.style.display = 'inline';
+    input.style.display = 'none';
+
+    editBtn.style.display = 'inline-block';
+    saveBtn.style.display = 'none';
+    cancelBtn.style.display = 'none';
+}
+
+/**
+ * Toggle password change form
+ */
+let pwOpen = false;
+let savedScrollY = 0;
+
+function togglePassword() {
+    const body = document.getElementById('passwordForm');
+    const card = body.closest('.profile-password-card');
+
+    if (!pwOpen) {
+        // store current scroll position
+        savedScrollY = window.scrollY;
+
+        body.classList.remove('is-hidden');
+        card.classList.add('pw-open');
+
+        pwOpen = true;
+    } else {
+        body.classList.add('is-hidden');
+        card.classList.remove('pw-open');
+
+        pwOpen = false;
+
+        // restore original scroll position
+        window.scrollTo({ top: savedScrollY, behavior: 'smooth' });
+    }
+}
+
+/**
+ * Toggle save button when input is not blank
+ */
+function toggleSave(field) {
+    const input = document.getElementById(field + 'Input');
+    const saveBtn = document.getElementById(field + 'Save');
+
+    if (!input || !saveBtn) return;
+
+    const value = input.value.trim();
+
+    if (value.length === 0) {
+        saveBtn.style.display = 'none';
+    } else {
+        saveBtn.style.display = 'inline-block';
+    }
+}

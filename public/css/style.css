@@ -24,7 +24,7 @@
     --text-muted: #6b8ab5;
     --text-inverse: #FFFFFF;
 
-    /* Accents — derived from your palette */
+    /* Accents */
     --accent-primary: #148bdb;
     --accent-primary-hover: #042b94;
     --accent-primary-light: rgba(20, 139, 219, 0.1);
@@ -1754,4 +1754,193 @@ textarea.form-control {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* ===================== Profile ===================== */
+.profile-title {
+    max-width: 600px;
+    margin: var(--space-8) auto var(--space-4);
+    font-size: var(--font-size-3xl);
+    color: var(--text-primary);
+    font-weight: 700;
+    border-bottom: 2px solid var(--text-primary);
+    padding-bottom: 6px;
+}
+
+.profile-card {
+    max-width: 600px;
+    margin: var(--space-8) auto;
+    padding: var(--space-5);
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.profile-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 140px;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-row form {
+    display: contents;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.profile-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.profile-actions {
+    justify-self: end;
+    display: flex;
+    gap: var(--space-2);
+}
+
+.profile-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-btn {
+    min-width: 64px;
+    text-align: center;
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--transition-base);
+}
+
+/* Edit button */
+.profile-btn.edit {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+.profile-btn.edit:hover {
+    background: var(--accent-primary-light);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+/* Save button */
+.profile-btn.save {
+    background: var(--gradient-primary);
+    color: var(--text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-btn.save:hover {
+    background: var(--gradient-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.profile-btn.save:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Deactivate button */
+.profile-deactivate {
+    max-width: 600px;
+    margin: var(--space-6) auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-deactivate {
+    background: linear-gradient(135deg, #ff6b6b, #e03131);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(224, 49, 49, 0.3);
+}
+
+.btn-deactivate:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(224, 49, 49, 0.4);
+    background: linear-gradient(135deg, #ff5252, #c92a2a);
+}
+
+.btn-deactivate:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(224, 49, 49, 0.3);
+}
+
+.profile-btn.cancel {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-light);
+}
+
+/* Cancel button */
+.profile-btn.cancel:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.profile-btn.cancel:active {
+    transform: translateY(0);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.profile-subtitle {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+}
+
+/* Password change section */
+.profile-password-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pw-arrow {
+    font-size: 20px;
+    transition: transform 0.25s ease;
+    color: var(--text-secondary);
+}
+
+.profile-password-body {
+    margin-top: var(--space-3);
+}
+
+.profile-password-body .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.pw-open .pw-arrow {
+    transform: rotate(180deg);
+}
+
+.is-hidden {
+    display: none;
 }

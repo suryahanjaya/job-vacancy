@@ -5,6 +5,7 @@
  */
 
 session_start();
+date_default_timezone_set('Asia/Ho_Chi_Minh'); // Set default time zone for consistency
 
 // Load config FIRST (without APP_ROOT)
 require_once __DIR__ . '/../config/config.php';

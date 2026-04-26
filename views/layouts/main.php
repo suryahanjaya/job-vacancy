@@ -28,17 +28,20 @@
                     <li><a href="/employer/jobs"
                             class="<?= str_starts_with($requestUri ?? '', '/employer') ? 'active' : '' ?>">My Postings</a>
                     </li>
+                    <li><a href="/dashboard"
+                            class="<?= str_starts_with($requestUri ?? '', '/dashboard') ? 'active' : '' ?>">Dashboard</a>
+                    </li>
                 <?php endif; ?>
 
                 <?php if (isLoggedIn() && getUserRole() === 'admin'): ?>
-                    <li><a href="/admin/dashboard"
-                            class="<?= str_starts_with($requestUri ?? '', '/admin') ? 'active' : '' ?>">Admin</a></li>
+                    <li><a href="/dashboard"
+                            class="<?= str_starts_with($requestUri ?? '', '/dashboard') ? 'active' : '' ?>">Admin</a></li>
                 <?php endif; ?>
             </ul>
 
             <div class="navbar-actions">
                 <?php if (isLoggedIn()): ?>
-                    <a href="/dashboard" class="user-menu">
+                    <a href="/profile" class="user-menu">
                         <div class="user-avatar"><?= strtoupper(substr(getUserName(), 0, 1)) ?></div>
                         <div class="user-info">
                             <span class="user-name"><?= h(getUserName()) ?></span>

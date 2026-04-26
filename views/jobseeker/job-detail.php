@@ -98,6 +98,9 @@
                     <?= h($job['company_name'] ?? $job['employer_name']) ?></div>
                 <div style="color: var(--text-secondary); font-size: var(--font-size-sm);">Contact:
                     <?= h($job['employer_name']) ?></div>
+                <div style="color: var(--text-secondary); font-size: var(--font-size-sm);">Email:
+                    <?= h($job['employer_email']) ?>
+                </div>
             </div>
         </div>
     </div>

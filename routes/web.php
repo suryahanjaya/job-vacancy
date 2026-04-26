@@ -33,6 +33,15 @@ Router::get('/logout', 'AuthController@logout');
 Router::get('/dashboard', 'DashboardController@index', ['AuthMiddleware']);
 
 // ==========================================
+// Profile Routes
+// ==========================================
+
+Router::get('/profile', 'UserController@profile', ['AuthMiddleware']);
+Router::post('/profile/update-field', 'UserController@updateField', ['AuthMiddleware']);
+Router::post('/profile/deactivate', 'UserController@deactivateAccount', ['AuthMiddleware']);
+Router::post('/profile/update-password', 'UserController@updatePassword', ['AuthMiddleware']);
+
+// ==========================================
 // Employer Routes
 // ==========================================
 
@@ -68,3 +77,5 @@ Router::post('/admin/reference/{table}/{id}/delete', 'AdminController@referenceD
 Router::get('/api/cities', 'ApiController@getCities');
 Router::get('/api/districts', 'ApiController@getDistricts');
 Router::get('/api/job-titles', 'ApiController@getJobTitles');
+
+

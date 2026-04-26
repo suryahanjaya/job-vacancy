@@ -110,4 +110,33 @@ class UserModel
         $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    /**
+    * Update a single field
+    */
+    public function updateSingleField($id, $field, $value)
+    {
+        $allowed = ['full_name', 'email', 'phone', 'company_name'];
+
+        if (!in_array($field, $allowed)) {
+            return false;
+        }
+
+        $sql = "UPDATE users SET $field = ?, updated_at = NOW() WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([$value, $id]);
+    }
+
+    /**
+     * Update user password
+     */
+    public function updatePassword($id, $hashedPassword)
+    {
+        $stmt = $this->db->prepare(
+            "UPDATE users SET password = ?, updated_at = NOW() WHERE id = ?"
+        );
+
+        return $stmt->execute([$hashedPassword, $id]);
+    }
 }
