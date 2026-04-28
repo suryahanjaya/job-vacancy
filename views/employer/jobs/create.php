@@ -212,7 +212,7 @@
                             </select>
                         </div>
                         <button type="button" class="btn-remove" onclick="removeSkillRow(this)"
-                            style="align-self: end;">&times;</button>
+                            style="align-self: end;">✕</button>
                     </div>
                 </div>
 

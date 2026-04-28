@@ -63,23 +63,20 @@
             <div class="container" style="padding-top: var(--space-5);">
                 <div class="alert alert-<?= h($flash['type']) ?>" id="flashAlert">
                     <?= h($flash['message']) ?>
-                    <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
                 </div>
             </div>
         <?php endif; ?>
 
         <?php $errors = getErrors(); ?>
         <?php if (!empty($errors)): ?>
-            <div class="container" style="padding-top: var(--space-3);">
-                <div class="alert alert-error">
-                    <div>
-                        <strong>Please fix the following errors:</strong>
-                        <ul style="margin-top: 8px; padding-left: 20px;">
-                            <?php foreach ($errors as $error): ?>
-                                <li><?= h($error) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
+            <div class="alert alert-error">
+                <div>
+                    <strong>Please fix the following errors:</strong>
+                    <ul>
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= h($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
         <?php endif; ?>

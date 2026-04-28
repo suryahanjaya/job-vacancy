@@ -45,9 +45,9 @@
                                             <a href="/jobs/<?= $job['id'] ?>" class="btn btn-sm btn-secondary"
                                                 target="_blank">View</a>
                                             <form action="/admin/jobs/<?= $job['id'] ?>/delete" method="POST"
-                                                style="display:inline;" onsubmit="return confirm('Remove this job posting?');">
+                                                style="display:inline;">
                                                 <?= csrfField() ?>
-                                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="handleConfirm(this.form, 'Remove this job posting?')">Remove</button>
                                             </form>
                                         </div>
                                     </td>

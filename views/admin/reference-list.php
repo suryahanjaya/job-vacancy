@@ -178,10 +178,9 @@
                                             <td><?= $item['level_order'] ?? 0 ?></td><?php endif; ?>
                                         <td>
                                             <form action="/admin/reference/<?= h($tableName) ?>/<?= $item['id'] ?>/delete"
-                                                method="POST" style="display:inline;"
-                                                onsubmit="return confirm('Delete this entry?');">
+                                                method="POST" style="display:inline;">
                                                 <?= csrfField() ?>
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="handleConfirm(this.form, 'Delete this entry?')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

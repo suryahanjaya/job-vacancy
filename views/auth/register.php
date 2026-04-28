@@ -11,19 +11,20 @@
 
             <?php $flash = getFlash(); ?>
             <?php if ($flash): ?>
-                <div class="alert alert-<?= h($flash['type']) ?>"><?= h($flash['message']) ?></div>
-            <?php endif; ?>
-
-            <?php $errors = getErrors(); ?>
-            <?php if (!empty($errors)): ?>
-                <div class="alert alert-error">
-                    <?php foreach ($errors as $error): ?>
-                        <div><?= h($error) ?></div>
-                    <?php endforeach; ?>
+                <div class="alert alert-<?= h($flash['type']) ?>">
+                    <?= h($flash['message']) ?>
                 </div>
             <?php endif; ?>
 
-            <form action="/register" method="POST" novalidate>
+            <?php if (!empty($errors)): ?>
+                <?php foreach ($errors as $error): ?>
+                    <div class="alert alert-error">
+                        <?= h($error) ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <form action="/register" method="POST">
                 <?= csrfField() ?>
 
                 <div class="form-group">

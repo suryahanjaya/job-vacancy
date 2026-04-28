@@ -50,10 +50,9 @@
                                             <a href="/employer/jobs/<?= $job['id'] ?>/edit"
                                                 class="btn btn-sm btn-secondary">Edit</a>
                                             <form action="/employer/jobs/<?= $job['id'] ?>/delete" method="POST"
-                                                style="display:inline;"
-                                                onsubmit="return confirm('Are you sure you want to delete this job posting?');">
+                                                style="display:inline;">
                                                 <?= csrfField() ?>
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="handleConfirm(this.form, 'Are you sure you want to delete this job posting?')">Delete</button>
                                             </form>
                                         </div>
                                     </td>

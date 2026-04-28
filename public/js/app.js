@@ -4,6 +4,16 @@
  */
 
 // ============================================
+// Entry Point
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    initAlerts();
+    initSkillsState();
+    updateSkillCount();
+    initCascadingSelects();
+});
+
+// ============================================
 // Mobile Menu Toggle
 // ============================================
 
@@ -143,6 +153,16 @@ function filterSelectByData(select, dataKey, value) {
 let skillIndex = 1; // Start from 1 since index 0 already exists
 
 /**
+ * Initialize skill index based on existing rows (for edit form)
+ */
+function initSkillsState() {
+    const container = document.getElementById('skillsContainer');
+    if (!container) return;
+
+    skillIndex = container.querySelectorAll('.skill-row').length;
+}
+
+/**
  * Add a new skill row
  */
 function addSkillRow() {
@@ -187,7 +207,7 @@ function addSkillRow() {
                 ${profOpts}
             </select>
         </div>
-        <button type="button" class="btn-remove" onclick="removeSkillRow(this)" style="align-self: end;">✕</button>
+        <button type="button" class="btn-remove" onclick="removeSkillRow(this)">✕</button>
     `;
 
     container.appendChild(row);
@@ -203,11 +223,11 @@ function removeSkillRow(btn) {
     const rows = container.querySelectorAll('.skill-row');
 
     if (rows.length <= 1) {
-        alert('At least one skill is required.');
+        showAlert('At least one skill is required.', 'error');
         return;
     }
 
-    btn.closest('.skill-row').remove();
+    btn.closest('.skill-row')?.remove();
     updateSkillCount();
 }
 
@@ -237,35 +257,42 @@ function updateSkillCount() {
 
 
 // ============================================
-// Flash Message Auto-dismiss
+// Alert system
 // ============================================
+function initAlerts() {
+    document.querySelectorAll('.alert').forEach(alert => {
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Auto-dismiss flash messages after 5 seconds
-    const flashAlert = document.getElementById('flashAlert');
-    if (flashAlert) {
-        setTimeout(() => {
-            flashAlert.style.opacity = '0';
-            flashAlert.style.transform = 'translateY(-10px)';
-            flashAlert.style.transition = 'all 0.3s ease';
-            setTimeout(() => flashAlert.remove(), 300);
+        const timer = setTimeout(() => {
+            alert.classList.add('fade-out');
+            setTimeout(() => alert.remove(), 400);
         }, 5000);
-    }
 
-    // Initialize skill count on page load
-    updateSkillCount();
+        alert.addEventListener('click', () => {
+            clearTimeout(timer);
+            alert.classList.add('fade-out');
+            setTimeout(() => alert.remove(), 400);
+        });
+    });
+}
 
-    // Initialize skill index based on existing rows
-    const container = document.getElementById('skillsContainer');
-    if (container) {
-        const rows = container.querySelectorAll('.skill-row');
-        skillIndex = rows.length;
-    }
+function showAlert(message, type = 'error') {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
 
-    // Filter initial cascading selections based on current values
-    initCascadingSelects();
-});
+    document.body.appendChild(alert);
 
+    const timer = setTimeout(() => {
+        alert.classList.add('fade-out');
+        setTimeout(() => alert.remove(), 400);
+    }, 5000);
+
+    alert.addEventListener('click', () => {
+        clearTimeout(timer);
+        alert.classList.add('fade-out');
+        setTimeout(() => alert.remove(), 400);
+    });
+}
 
 /**
  * Initialize cascading selects on page load
@@ -388,15 +415,6 @@ function editField(field) {
 }
 
 /**
- * Confirm account deactivation
- */
-function confirmDeactivate() {
-    if (confirm('Are you sure you want to deactivate your account? This action cannot be undone.')) {
-        document.getElementById('deactivateForm').submit();
-    }
-}
-
-/**
  * Cancel edit
  */
 function cancelEdit(field) {
@@ -463,4 +481,42 @@ function toggleSave(field) {
     } else {
         saveBtn.style.display = 'inline-block';
     }
+}
+
+// ============================================
+// Custom confirm dialog
+// ============================================
+function showConfirm(message, onYes) {
+    const overlay = document.createElement('div');
+    overlay.className = 'confirm-overlay';
+
+    overlay.innerHTML = `
+        <div class="confirm-box">
+            <p>${message}</p>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel" id="cancelBtn">Cancel</button>
+                <button class="confirm-btn confirm" id="okBtn">Yes</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay.querySelector('#cancelBtn').onclick = () => {
+        overlay.remove();
+    };
+
+    overlay.querySelector('#okBtn').onclick = () => {
+        overlay.remove();
+        onYes();
+    };
+}
+
+/**
+ * Handle form submission with confirmation
+ */
+function handleConfirm(form, message) {
+    showConfirm(message, () => {
+        form.submit();
+    });
 }
