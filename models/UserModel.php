@@ -103,15 +103,6 @@ class UserModel
     }
 
     /**
-     * Delete user
-     */
-    public function delete($id)
-    {
-        $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
-        return $stmt->execute([$id]);
-    }
-
-    /**
     * Update a single field
     */
     public function updateSingleField($id, $field, $value)

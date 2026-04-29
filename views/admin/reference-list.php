@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-4"><a href="/admin/dashboard" class="btn btn-secondary btn-sm btn-block">&larr; Back to
+            <div class="mt-4"><a href="/dashboard" class="btn btn-secondary btn-sm btn-block">&larr; Back to
                     Dashboard</a></div>
         </div>
 

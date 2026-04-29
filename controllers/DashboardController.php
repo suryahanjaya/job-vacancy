@@ -56,10 +56,27 @@ class DashboardController
     private function adminDashboard()
     {
         $stats = $this->jobModel->getStats();
+        $groupBy = $_GET['groupBy'] ?? null;
+        $chartData = $this->jobModel->getChartData($groupBy ?? '');
 
         view('admin/dashboard', [
             'title' => 'Admin Dashboard',
-            'stats' => $stats
+            'stats' => $stats,
+            'chartData' => $chartData,
+            'groupBy' => $groupBy
         ]);
+    }
+
+    /**
+     * API endpoint for chart data
+     */
+    public function chartData()
+    {
+        $groupBy = $_GET['groupBy'] ?? null;
+
+        $data = $this->jobModel->getChartData($groupBy ?? '');
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 }

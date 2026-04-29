@@ -33,6 +33,11 @@ Router::get('/logout', 'AuthController@logout');
 Router::get('/dashboard', 'DashboardController@index', ['AuthMiddleware']);
 
 // ==========================================
+// Admin Chart Data API
+// ==========================================
+Router::get('/admin/chart-data', 'DashboardController@chartData', ['AuthMiddleware']);
+
+// ==========================================
 // Profile Routes
 // ==========================================
 
@@ -58,7 +63,6 @@ Router::get('/employer/jobs/{id}/toggle', 'JobController@toggleActive', [['AuthM
 // Admin Routes
 // ==========================================
 
-Router::get('/admin/dashboard', 'AdminController@dashboard', [['AuthMiddleware', 'admin']]);
 Router::get('/admin/jobs', 'AdminController@jobs', [['AuthMiddleware', 'admin']]);
 Router::get('/admin/jobs/{id}/toggle', 'AdminController@toggleJob', [['AuthMiddleware', 'admin']]);
 Router::post('/admin/jobs/{id}/delete', 'AdminController@deleteJob', [['AuthMiddleware', 'admin']]);

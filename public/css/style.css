@@ -1501,7 +1501,12 @@ textarea.form-control {
 /* ===================== Empty State ===================== */
 
 .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+
     padding: var(--space-16) var(--space-6);
 }
 
@@ -1514,6 +1519,42 @@ textarea.form-control {
 .empty-state p {
     color: var(--text-muted);
     margin-bottom: var(--space-6);
+}
+
+/* Placeholder image styling */
+.empty-image{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: var(--space-6);
+    opacity: 0.3;
+}
+
+.empty-image.employer-view{
+    width: 120px;
+}
+
+.empty-image.admin-view{
+    width: 150px;
+}
+
+.empty-state.search-view{
+    background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('/images/no-result.png') center/contain no-repeat;
+    background-color: var(--color-white);
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.empty-state.home-view{
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('/images/opportunities.jpg') center/contain no-repeat;
+    background-color: var(--color-white);
+    text-align: center;
+    padding: 120px;
+}
+
+.empty-image.chart-view{
+    width: 250px;
 }
 
 /* ===================== Footer ===================== */

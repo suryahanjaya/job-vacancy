@@ -82,7 +82,7 @@
                 <a href="/jobs" class="btn btn-primary btn-lg">View All Jobs</a>
             </div>
         <?php else: ?>
-            <div class="empty-state">
+            <div class="empty-state home-view">
                 <h3>No jobs posted yet</h3>
                 <p>Be the first employer to post a job vacancy!</p>
                 <?php if (!isLoggedIn()): ?>

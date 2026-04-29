@@ -5,7 +5,7 @@
             <h1>Manage Users</h1>
             <p class="text-muted">View and manage all registered users</p>
         </div>
-        <a href="/admin/dashboard" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a>
+        <a href="/dashboard" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a>
     </div>
 
     <div class="card">

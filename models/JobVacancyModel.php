@@ -537,4 +537,116 @@ class JobVacancyModel
 
         return $stats;
     }
+
+    /**
+     * Get job counts by a specified field (for admin dashboard)
+     */
+    public function getChartData($groupBy)
+    {
+        switch ($groupBy) {
+            case 'category':
+                $sql = "
+                    SELECT jc.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN job_categories jc ON jv.job_category_id = jc.id
+                    WHERE jv.is_active = 1
+                    GROUP BY jc.name
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'industry':
+                $sql = "
+                    SELECT ind.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN industries ind ON jv.industry_id = ind.id
+                    WHERE jv.is_active = 1
+                    GROUP BY ind.name
+                    ORDER BY total DESC
+                ";
+                break;
+                
+            case 'job_level':
+                $sql = "
+                    SELECT jl.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN job_levels jl ON jv.job_level_id = jl.id
+                    WHERE jv.is_active = 1
+                    GROUP BY jl.name
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'employment_type':
+                $sql = "
+                    SELECT et.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN employment_types et ON jv.employment_type_id = et.id
+                    WHERE jv.is_active = 1
+                    GROUP BY et.name
+                    ORDER BY total DESC
+                ";
+                break;
+            
+            case 'salary_range':
+                $sql = "
+                    SELECT sr.label AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN salary_ranges sr ON jv.salary_range_id = sr.id
+                    WHERE jv.is_active = 1
+                    GROUP BY sr.label
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'experience_level':
+                $sql = "
+                    SELECT el.label AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN experience_levels el ON jv.experience_level_id = el.id
+                    WHERE jv.is_active = 1
+                    GROUP BY el.label
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'work_arrangement':
+                $sql = "
+                    SELECT wa.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN work_arrangements wa ON jv.work_arrangement_id = wa.id
+                    WHERE jv.is_active = 1
+                    GROUP BY wa.name
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'country':
+                $sql = "
+                    SELECT c.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN countries c ON jv.country_id = c.id
+                    WHERE jv.is_active = 1
+                    GROUP BY c.name
+                    ORDER BY total DESC
+                ";
+                break;
+
+            case 'city':
+                $sql = "
+                    SELECT ci.name AS label, COUNT(jv.id) AS total
+                    FROM job_vacancies jv
+                    JOIN cities ci ON jv.city_id = ci.id
+                    WHERE jv.is_active = 1
+                    GROUP BY ci.name
+                    ORDER BY total DESC
+                ";
+                break;
+
+            default:
+                return [];
+        }
+
+        return $this->db->query($sql)->fetchAll();
+    }
 }

@@ -84,6 +84,7 @@
 
     <?php else: ?>
         <div class="empty-state">
+            <img src="/images/add-job.png" alt="No jobs yet" class="empty-image employer-view">
             <h3>No job postings yet</h3>
             <p>Create your first job vacancy to start attracting talent.</p>
             <a href="/employer/jobs/create" class="btn btn-primary btn-lg">Create First Posting</a>

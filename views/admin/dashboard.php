@@ -38,6 +38,47 @@
         </div>
     </div>
 
+    <!-- Charts -->
+    <div class="card">
+        <div class="card-header">
+            <h3>Jobs Charts</h3>
+        </div>
+        <div class="card-body" style="position: relative; height: 500px;">
+            <!-- Selection -->
+            <div style="position:absolute; top:10px; right:10px; z-index:10;">
+                <select id="groupBySelect">
+                    <option value="" selected>-- Select --</option>
+                    <optgroup label="Job Structure">
+                        <option value="category">Category</option>
+                        <option value="industry">Industry</option>
+                        <option value="job_level">Job Level</option>
+                    </optgroup>
+
+                    <optgroup label="Employment">
+                        <option value="employment_type">Employment Type</option>
+                        <option value="work_arrangement">Work Arrangement</option>
+                        <option value="experience_level">Experience Level</option>
+                        <option value="salary_range">Salary Range</option>
+                    </optgroup>
+
+                    <optgroup label="Location">
+                        <option value="country">Country</option>
+                        <option value="city">City</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state">
+                <img src="/images/no-data.jpg" alt="No data" class="empty-image chart-view">
+                <p style="font-size: var(--font-size-2xl);">No data</p>
+            </div>
+
+            <!-- Chart View -->
+            <canvas id="jobsChart" data-chart='<?= json_encode($chartData) ?>'></canvas>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <h3>Management Tools</h3>

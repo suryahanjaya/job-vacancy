@@ -5,7 +5,7 @@
             <h1>Manage Job Postings</h1>
             <p class="text-muted">Review and moderate all job vacancy listings</p>
         </div>
-        <a href="/admin/dashboard" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a>
+        <a href="/dashboard" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a>
     </div>
 
     <?php if (!empty($jobs)): ?>
@@ -72,6 +72,7 @@
         <?php endif; ?>
     <?php else: ?>
         <div class="empty-state">
+            <img src="/images/empty-folder.png" alt="No jobs listing" class="empty-image admin-view">
             <h3>No job postings</h3>
             <p>No job postings have been created yet.</p>
         </div>

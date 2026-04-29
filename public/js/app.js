@@ -520,3 +520,114 @@ function handleConfirm(form, message) {
         form.submit();
     });
 }
+
+// ============================================
+// Chart.js for Admin Dashboard
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('jobsChart');
+    if (!canvas) return;
+
+    const container = canvas.parentElement;
+    const emptyState = container.querySelector('.empty-state');
+    const select = document.getElementById('groupBySelect');
+
+    // Parse initial chart data
+    let data = [];
+
+    try {
+        data = JSON.parse(canvas.dataset.chart || '[]');
+        if (!Array.isArray(data)) data = [];
+    } catch (err) {
+        console.error('Invalid chart data JSON:', err);
+        data = [];
+    }
+
+    // helper: toggle UI state
+    function toggleState(hasData) {
+        if (emptyState) {
+            emptyState.style.display = hasData ? 'none' : 'flex';
+        }
+        canvas.style.display = hasData ? 'block' : 'none';
+    }
+
+    const hasInitialData = data.length > 0;
+
+    // initial state
+    toggleState(hasInitialData);
+
+    // Create Chart
+    const chart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: data.map(item => item.label),
+            datasets: [{
+                label: 'Jobs',
+                data: data.map(item => Number(item.total) || 0),
+                backgroundColor: '#148bdb'
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+
+    // Dropdown handler
+    if (!select) return;
+
+    select.addEventListener('change', async (e) => {
+        const groupBy = e.target.value;
+
+        try {
+            // empty selection → clear chart + show empty state
+            if (!groupBy) {
+                chart.data.labels = [];
+                chart.data.datasets[0].data = [];
+                chart.update();
+
+                toggleState(false);
+                return;
+            }
+
+            const res = await fetch(
+                `/admin/chart-data?groupBy=${encodeURIComponent(groupBy)}`
+            );
+
+            const newData = await res.json();
+            const hasData = Array.isArray(newData) && newData.length > 0;
+
+            const labels = newData.map(item => item.label);
+            const values = newData.map(item => Number(item.total) || 0);
+
+            chart.data.labels = labels;
+            chart.data.datasets[0].data = values;
+            chart.update();
+
+            // toggle UI based on result
+            toggleState(hasData);
+
+        } catch (err) {
+            console.error('Failed to fetch chart data:', err);
+            toggleState(false);
+        }
+    });
+});
+
+/**
+ * Reset groupBy select on page show (back navigation)
+ */
+window.addEventListener('pageshow', () => {
+    const select = document.getElementById('groupBySelect');
+    if (select) select.value = "";
+});

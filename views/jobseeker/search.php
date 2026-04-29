@@ -184,7 +184,7 @@
             </div>
         <?php endif; ?>
     <?php else: ?>
-        <div class="empty-state">
+        <div class="empty-state search-view">
             <h3>No jobs found</h3>
             <p>Try adjusting your search criteria or clearing filters.</p>
             <a href="/jobs" class="btn btn-secondary">Clear All Filters</a>

@@ -21,18 +21,6 @@ class AdminController
     }
 
     /**
-     * Admin dashboard
-     */
-    public function dashboard()
-    {
-        $stats = $this->jobModel->getStats();
-        view('admin/dashboard', [
-            'title' => 'Admin Dashboard',
-            'stats' => $stats
-        ]);
-    }
-
-    /**
      * Manage job vacancies
      */
     public function jobs()
@@ -96,7 +84,7 @@ class AdminController
 
         if (!isset($allowedTables[$table])) {
             setFlash('error', 'Invalid reference table.');
-            redirect('/admin/dashboard');
+            redirect('/dashboard');
             return;
         }
 

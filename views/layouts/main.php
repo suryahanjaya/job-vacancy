@@ -94,6 +94,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
     <script src="/js/app.js"></script>
 </body>
 
